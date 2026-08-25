@@ -1,0 +1,56 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(uuid())
+  email     String   @unique
+  password  String
+  // Valores permitidos: USER | ADMIN
+  role      String   @default("USER")
+  createdAt DateTime @default(now())
+
+  cartItems CartItem[]
+  orders    Order[]
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  title       String
+  description String   @default("")
+  price       Float
+  stock       Int      @default(0)
+  imageUrl    String?
+  createdAt   DateTime @default(now())
+
+  cartItems CartItem[]
+}
+
+model CartItem {
+  id        String   @id @default(uuid())
+  userId    String
+  productId String
+  quantity  Int
+  createdAt DateTime @default(now())
+
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, productId])
+}
+
+model Order {
+  id                    String   @id @default(uuid())
+  userId                String
+  total                 Float
+  status                String   @default("PENDING")
+  stripePaymentIntentId String   @unique
+  createdAt             DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+}
