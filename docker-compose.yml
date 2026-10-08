@@ -15,9 +15,7 @@ services:
       retries: 10
 
   api:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: jjal20021998/ecommerce-api:latest
     restart: unless-stopped
     ports:
       - "${PORT:-3000}:3000"
