@@ -1,0 +1,13 @@
+node_modules
+.git
+.env
+*.md
+backend/prisma/dev.db*
+backend/**/*.test.js
+docs
+spec
+.opencode
+build-zip.js
+docker-compose.yml
+Dockerfile
+.dockerignore
