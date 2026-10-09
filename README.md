@@ -141,6 +141,8 @@ Variables de entorno (`.env`):
 
 Modelos definidos en `backend/prisma/schema.prisma`:
 
+```mermaid
+
 erDiagram
     User ||--o{ CartItem : tiene
     User ||--o{ Order : realiza
@@ -180,6 +182,9 @@ erDiagram
         string stripePaymentIntentId UK
         datetime createdAt
     }
+```
+
+
 
 | Entidad | Campo | Tipo | Notas |
 |---|---|---|---|
