@@ -1,4 +1,4 @@
-FROM node:20-slim AS build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
@@ -8,11 +8,13 @@ RUN npm install
 COPY backend ./backend
 RUN npx prisma generate --schema=backend/prisma/schema.prisma
 
-FROM node:20-slim AS runner
+FROM node:20-alpine AS runner
 
 WORKDIR /app
 
 ENV NODE_ENV=production
+
+RUN apk add --no-cache openssl
 
 COPY --from=build /app/node_modules ./node_modules
 COPY package.json ./
