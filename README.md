@@ -136,6 +136,7 @@ Variables de entorno (`.env`):
 | `STRIPE_WEBHOOK_SECRET` | Secreto de webhook Stripe | `''` |
 | `CORS_ORIGIN` | Origen permitido CORS | `*` |
 
+
 ## Dominio de datos
 
 Modelos definidos en `backend/prisma/schema.prisma`:
@@ -179,7 +180,6 @@ erDiagram
         string stripePaymentIntentId UK
         datetime createdAt
     }
-```
 
 | Entidad | Campo | Tipo | Notas |
 |---|---|---|---|
